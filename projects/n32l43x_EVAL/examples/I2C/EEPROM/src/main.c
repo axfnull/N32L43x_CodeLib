@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2019, Nations Technologies Inc.
+ * Copyright (c) 2022, Nations Technologies Inc.
  *
  * All rights reserved.
  * ****************************************************************************
@@ -28,9 +28,9 @@
 /**
  * @file main.c
  * @author Nations
- * @version v1.0.0
+ * @version v1.2.0
  *
- * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
+ * @copyright Copyright (c) 2022, Nations Technologies Inc. All rights reserved.
  */
 #include "n32l43x.h"
 #include "i2c_eeprom.h"
@@ -60,6 +60,8 @@ Status Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
  */
 int main(void)
 {
+ while (1)
+  {
     uint16_t i = 0;
 
     log_init();
@@ -92,10 +94,7 @@ int main(void)
     {
         log_info("the write and read data are different,I2C EEPROM test fail\r\n");
     }
-
-    while (1)
-    {
-    }
+  }
 }
 
 /**

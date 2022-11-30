@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2019, Nations Technologies Inc.
+ * Copyright (c) 2022, Nations Technologies Inc.
  *
  * All rights reserved.
  * ****************************************************************************
@@ -28,9 +28,9 @@
 /**
  * @file n32l43x_adc.c
  * @author Nations
- * @version v1.0.3
+ * @version v1.2.0
  *
- * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
+ * @copyright Copyright (c) 2022, Nations Technologies Inc. All rights reserved.
  */
 #include "n32l43x_adc.h"
 #include "n32l43x_rcc.h"
@@ -1356,7 +1356,23 @@ void ADC_SetConvResultBitNum(ADC_Module* ADCx, uint32_t ResultBitNum)
     ADCx->CTRL3 = tmpregister;
     return;
 }
+/**
+ * @brief  Set Adc Clock bits for AHB .
+ * @param ADCx where x can be 1 to select the ADC peripheral.
+ */
+void ADC_AHB_Clock_Mode_Config(ADC_Module* ADCx)
+{
+    ADCx->CTRL3 &= ADC_CLOCK_AHB;  
+}
 
+/**
+ * @brief  Set Adc Clock bits for PLL .
+ * @param ADCx where x can be 1 to select the ADC peripheral.
+ */
+void ADC_PLL_Clock_Mode_Config(ADC_Module* ADCx)
+{   
+    ADCx->CTRL3 |= ADC_CLOCK_PLL;  
+}
 
 /**
  * @brief  Configures the ADCHCLK prescaler.
@@ -1392,10 +1408,12 @@ void ADC_ConfigClk(ADC_CTRL3_CKMOD ADC_ClkMode, uint32_t RCC_ADCHCLKPrescaler)
 {
     if(ADC_ClkMode==ADC_CTRL3_CKMOD_AHB){
         RCC_ConfigAdcPllClk(RCC_ADCPLLCLK_DIV1, DISABLE);
-        RCC_ConfigAdcHclk(RCC_ADCHCLKPrescaler);	
+        RCC_ConfigAdcHclk(RCC_ADCHCLKPrescaler);
+        ADC_AHB_Clock_Mode_Config(ADC);
     }else{
         RCC_ConfigAdcPllClk(RCC_ADCHCLKPrescaler, ENABLE);
-        RCC_ConfigAdcHclk(RCC_ADCHCLK_DIV1);	
+        RCC_ConfigAdcHclk(RCC_ADCHCLK_DIV1);
+        ADC_PLL_Clock_Mode_Config(ADC);
     }
 }
 /**

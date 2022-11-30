@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2019, Nations Technologies Inc.
+ * Copyright (c) 2022, Nations Technologies Inc.
  *
  * All rights reserved.
  * ****************************************************************************
@@ -28,9 +28,9 @@
 /**
  * @file system_n32l43x.c
  * @author Nations
- * @version v1.0.1
+ * @version v1.2.0
  *
- * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
+ * @copyright Copyright (c) 2022, Nations Technologies Inc. All rights reserved.
  */
 #include "n32l43x.h"
 
@@ -65,7 +65,7 @@
 #define SYSCLK_USE_HSE_PLL 4
 
 #ifndef SYSCLK_FREQ
-#define SYSCLK_FREQ 108000000
+#define SYSCLK_FREQ        108000000     
 #endif
 
 /*
@@ -77,7 +77,7 @@
 ** SYSCLK_USE_HSE_PLL  **
 */
 #ifndef SYSCLK_SRC
-#define SYSCLK_SRC SYSCLK_USE_HSE_PLL
+#define SYSCLK_SRC         SYSCLK_USE_HSE_PLL
 #endif
 
 #define PLL_DIV2_DISABLE 0x00000000
@@ -232,7 +232,7 @@ void SystemInit(void)
     RCC->CFG &= (uint32_t)0x0700FFFF;
 
     /* Reset CFG2 register */
-    RCC->CFG2 = 0x00000000;
+    RCC->CFG2 = 0x00007000;
 
     /* Reset CFG3 register */
     RCC->CFG3 = 0x00003800;
@@ -414,10 +414,15 @@ static void SetSysClock(void)
     uint32_t StartUpCounter = 0;
 
 #if (SYSCLK_SRC == SYSCLK_USE_MSI)
-
+    uint8_t i=0;
     bool MSIStatus = 0;
     /* Config MSI */
+    RCC->CTRLSTS &= 0xFFFFFF8F;
+    /*Delay for while*/
+    for(i=0;i<0x30;i++);
     RCC->CTRLSTS |= (((uint32_t)MSI_CLK) << 4);
+    /*Delay for while*/
+    for(i=0;i<0x30;i++);
     /* Enable MSI */
     RCC->CTRLSTS |= ((uint32_t)RCC_CTRLSTS_MSIEN);
 

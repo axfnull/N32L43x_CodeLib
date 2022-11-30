@@ -90,14 +90,14 @@
         <sRbox>1</sRbox>
         <tLdApp>1</tLdApp>
         <tGomain>0</tGomain>
-        <tRbreak>0</tRbreak>
+        <tRbreak>1</tRbreak>
         <tRwatch>1</tRwatch>
         <tRmem>1</tRmem>
         <tRfunc>0</tRfunc>
         <tRbox>1</tRbox>
         <tRtrace>1</tRtrace>
         <sRSysVw>1</sRSysVw>
-        <tRSysVw>0</tRSysVw>
+        <tRSysVw>1</tRSysVw>
         <sRunDeb>0</sRunDeb>
         <sLrtime>0</sLrtime>
         <bEvRecOn>1</bEvRecOn>

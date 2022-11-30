@@ -7,8 +7,8 @@
     软件开发环境：KEIL MDK-ARM V5.25
 
     硬件环境：
-        1、基于评估板N32L43XM-STB V1.0开发
-        2、MCU：N32G435VBL7
+        1、基于评估板N32L43XML-STB V1.0开发
+        2、MCU：N32L436MBL7
 
 
 3、使用说明
@@ -17,11 +17,11 @@
         1、时钟源：HSE+PLL
         2、时钟频率：108Mz/0MHz
         3、串口配置：
-                 - 串口为USART1（TX：PA9  RX：PA10）:
-                 - 数据位：  8
-                 - 停止位：  1
-                 - 奇偶校验：无
-                 - 波特率：  115200 
+            - 串口为USART1（TX：PA9  RX：PA10）:
+            - 数据位：  8
+            - 停止位：  1
+            - 奇偶校验：无
+            - 波特率：  115200 
 
 
     使用方法：
@@ -31,4 +31,31 @@
 
 4、注意事项
     无
+
+
+
+1. Function description
+    1. Enter and exit the SLEEP mode.
+
+2. Use environment
+    Software development environment: KEIL MDK-ARM V5.25
+    Hardware environment:
+	1. based on the evaluation board N32L43XML-STB V1.0 development
+	2. MCU: N32L436MBL7
+
+3. Instructions for use    
+    System configuration;
+	1. Clock source: HSE+PLL
+	2. Clock frequency: 108MHz
+	3. Serial port configuration:
+	    - Serial port: USART1 (TX: PA9 RX: PA10) :
+	    - Data bit: 8
+	    - Stop bit: 1
+	    - Parity check: None
+	    - Baud rate: 115200
+    Instructions:
+	After compiling in KEIL, burn it to the evaluation board, connect ammeter in series, and connect the evaluation board with PC serial tool. After the power-on, the serial port displays "MCU Prepare Enter Sleep Mode Core Stop Run". When the MCU enters Sleep Mode, the current of the kernel stopping becomes smaller (about 4.65mA). Press the wake button PA0 to interrupt MCU and wake up. The serial port prints: "MCU Run In Run Mode Sysclock From PLL(108MHz)" The current increases (about 4.97mA), so repeat the above experiment phenomenon.
+
+4. Matters needing attention
+    None
 

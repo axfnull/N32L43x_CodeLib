@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2019, Nations Technologies Inc.
+ * Copyright (c) 2022, Nations Technologies Inc.
  *
  * All rights reserved.
  * ****************************************************************************
@@ -28,9 +28,9 @@
 /**
  * @file main.c
  * @author Nations
- * @version v1.0.0
+ * @version v1.2.0
  *
- * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
+ * @copyright Copyright (c) 2022, Nations Technologies Inc. All rights reserved.
  */
 #include "main.h"
 #include <stdio.h>
@@ -44,9 +44,9 @@
 
 #define FLASH_PROGRAM_TIMEOUT ((uint32_t)0x00002000)
 
-#define BUFFER_SIZE (uint32_t)32
+#define BUFFER_SIZE  ((uint32_t)32)
 
-#ifdef  __IAR_ARM
+#if (defined __IAR_ARM )||(defined __GCC_ARM)
 uint32_t Flash_Data_Buffer[BUFFER_SIZE] __attribute__((section(".dma_test")));
 #else
 uint32_t Flash_Data_Buffer[BUFFER_SIZE] __attribute__((at(FLASH_WRITE_START_ADDR)));

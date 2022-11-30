@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2019, Nations Technologies Inc.
+ * Copyright (c) 2022, Nations Technologies Inc.
  *
  * All rights reserved.
  * ****************************************************************************
@@ -28,9 +28,9 @@
 /**
  * @file n32l43x_adc.h
  * @author Nations
- * @version v1.0.1
+ * @version v1.2.0
  *
- * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
+ * @copyright Copyright (c) 2022, Nations Technologies Inc. All rights reserved.
  */
 #ifndef __N32L43X_ADC_H__
 #define __N32L43X_ADC_H__
@@ -431,6 +431,9 @@ typedef struct
 #define ADC_CTRL3_CALDIF_MSK    ((uint32_t)0x01L << 2)
 #define ADC_CTRL3_RES_MSK       ((uint32_t)0x03L << 0)
 #define ADC_SAMPT3_SAMPSEL_MSK  ((uint32_t)0x01L << 3)
+
+#define ADC_CLOCK_PLL           ((uint32_t)ADC_CTRL3_CKMOD_MSK)
+#define ADC_CLOCK_AHB           ((uint32_t)(~ADC_CTRL3_CKMOD_MSK))
 typedef enum
 {
     ADC_CTRL3_CKMOD_AHB = 0,

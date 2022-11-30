@@ -1,8 +1,8 @@
 /******************************************************************************
  * @file     arm_math.h
  * @brief    Public header file for CMSIS DSP LibraryU
- * @version  V1.5.3
- * @date     10. January 2018
+ * @version  V1.2.0
+ * @date     09. August 2022
  ******************************************************************************/
 /*
  * Copyright (c) 2010-2018 Arm Limited or its affiliates. All rights reserved.

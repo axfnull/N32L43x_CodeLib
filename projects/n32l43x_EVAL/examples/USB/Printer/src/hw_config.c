@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2019, Nations Technologies Inc.
+ * Copyright (c) 2022, Nations Technologies Inc.
  *
  * All rights reserved.
  * ****************************************************************************
@@ -28,9 +28,9 @@
 /**
  * @file hw_config.c
  * @author Nations
- * @version v1.0.0
+ * @version v1.2.0
  *
- * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
+ * @copyright Copyright (c) 2022, Nations Technologies Inc. All rights reserved.
  */
 #include "hw_config.h"
 #include "usb_lib.h"
@@ -66,8 +66,7 @@ void Set_System(void)
     RCC->CFG |= RCC_CFG_APB1PRES_DIV4;
     RCC->CFG |= RCC_CFG_APB2PRES_DIV2;
 
-    FLASH->AC &= (uint32_t)((uint32_t)~FLASH_AC_LATENCY);
-    FLASH->AC |= (uint32_t)(FLASH_AC_LATENCY_3);
+    FLASH_SetLatency(FLASH_AC_LATENCY_2);
 
     /* Select PLL as system clock source */
     RCC->CFG &= (uint32_t)((uint32_t) ~(RCC_CFG_SCLKSW));

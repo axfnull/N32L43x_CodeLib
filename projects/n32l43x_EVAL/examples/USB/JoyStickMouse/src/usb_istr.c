@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2019, Nations Technologies Inc.
+ * Copyright (c) 2022, Nations Technologies Inc.
  *
  * All rights reserved.
  * ****************************************************************************
@@ -28,9 +28,9 @@
 /**
  * @file usb_istr.c
  * @author Nations
- * @version v1.0.0
+ * @version v1.2.0
  *
- * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
+ * @copyright Copyright (c) 2022, Nations Technologies Inc. All rights reserved.
  */
 #include "usb_lib.h"
 #include "usb_prop.h"
@@ -68,7 +68,6 @@ void (*pEpInt_OUT[7])(void) = {
  */
 void USB_Istr(void)
 {
-    uint32_t i=0;
     __IO uint32_t EP[8];
     
     wIstr = _GetISTR();
@@ -161,6 +160,7 @@ void USB_Istr(void)
 #endif
     /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 #if (IMR_MSK & STS_ESOF)
+    uint32_t i=0;
     if (wIstr & STS_ESOF & wInterrupt_Mask)
     {
         /* clear ESOF flag in STS */

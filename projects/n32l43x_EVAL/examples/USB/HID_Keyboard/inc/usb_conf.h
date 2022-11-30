@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Copyright (c) 2019, Nations Technologies Inc.
+ * Copyright (c) 2022, Nations Technologies Inc.
  *
  * All rights reserved.
  * ****************************************************************************
@@ -28,9 +28,9 @@
 /**
  * @file usb_conf.h
  * @author Nations
- * @version v1.0.0
+ * @version v1.2.0
  *
- * @copyright Copyright (c) 2019, Nations Technologies Inc. All rights reserved.
+ * @copyright Copyright (c) 2022, Nations Technologies Inc. All rights reserved.
  */
 #ifndef __USB_CONF_H__
 #define __USB_CONF_H__
@@ -64,8 +64,8 @@
 /* IMR_MSK */
 /* mask defining which events has to be handled */
 /* by the device application software */
-#define IMR_MSK (CTRL_CTRSM  | CTRL_WKUPM | CTRL_SUSPDM | CTRL_ERRORM  | CTRL_SOFM \
-                 | CTRL_ESOFM | CTRL_RSTM )
+#define IMR_MSK (CTRL_CTRSM  | CTRL_WKUPM | CTRL_SUSPDM  | CTRL_SOFM \
+                 | CTRL_RSTM )
 
 /* CTR service routines */
 /* associated to defined endpoints */
