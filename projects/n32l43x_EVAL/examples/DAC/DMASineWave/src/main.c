@@ -27,13 +27,9 @@
 
 /**
  * @file main.c
-<<<<<<< .mine
  * @author Nations 
-=======
- * @author Nations
->>>>>>> .r78075
- * @version v1.2.0
- *
+ * @version V1.2.1
+ * 
  * @copyright Copyright (c) 2022, Nations Technologies Inc. All rights reserved.
  */
 #include "n32l43x.h"

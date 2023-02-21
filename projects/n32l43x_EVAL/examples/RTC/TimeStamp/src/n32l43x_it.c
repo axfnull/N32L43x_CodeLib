@@ -28,7 +28,7 @@
 /**
  * @file n32l43x_it.c
  * @author Nations
- * @version v1.2.0
+ * @version V1.2.1
  *
  * @copyright Copyright (c) 2022, Nations Technologies Inc. All rights reserved.
  */
@@ -127,7 +127,6 @@ void DMA_IRQ_HANDLER(void)
 void TAMPER_IRQHandler(void)
 {
     EXTI_ClrITPendBit(EXTI_LINE19);
-
 }
 /******************************************************************************/
 /*                 n32l43x Peripherals Interrupt Handlers                     */

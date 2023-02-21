@@ -403,6 +403,11 @@
           <GroupName>USER</GroupName>
           <Files>
             <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\main.c</FilePath>
+            </File>
+            <File>
               <FileName>n32l43x_it.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\n32l43x_it.c</FilePath>
@@ -416,6 +421,16 @@
               <FileName>User_RTC_Config.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\User_RTC_Config.c</FilePath>
+            </File>
+            <File>
+              <FileName>User_RTCBKP_Config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\User_RTCBKP_Config.c</FilePath>
+            </File>
+            <File>
+              <FileName>User_Delay_Config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\User_Delay_Config.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -471,11 +486,6 @@
               <FileName>n32l43x_rcc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\firmware\n32l43x_std_periph_driver\src\n32l43x_rcc.c</FilePath>
-            </File>
-            <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\main.c</FilePath>
             </File>
             <File>
               <FileName>n32l43x_rtc.c</FileName>

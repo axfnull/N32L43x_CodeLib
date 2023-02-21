@@ -28,7 +28,7 @@
 /**
  * @file n32l43x_rtc.c
  * @author Nations
- * @version v1.2.0
+ * @version V1.2.1
  *
  * @copyright Copyright (c) 2022, Nations Technologies Inc. All rights reserved.
  */
@@ -270,30 +270,34 @@ ErrorStatus RTC_EnterInitMode(void)
     __IO uint32_t initcounter = 0x00;
     ErrorStatus status        = ERROR;
     uint32_t initstatus       = 0x00;
+
     /* Check if the Initialization mode is set */
     if ((RTC->INITSTS & RTC_INITSTS_INITF) == (uint32_t)RESET)
     {
-       /* Set the Initialization mode */
-       RTC->INITSTS = (uint32_t)RTC_INITSTS_INITM;
-       /* Wait till RTC is in INIT state and if Time out is reached exit */
-       do
-       {
-          initstatus = RTC->INITSTS & RTC_INITSTS_INITF;
-          initcounter++;
-       } while ((initcounter != INITMODE_TIMEOUT) && (initstatus == 0x00));
-       if ((RTC->INITSTS & RTC_INITSTS_INITF) != RESET)
-       {
-          status = SUCCESS;
-       }
-       else
-       {
-          status = ERROR;
-       }
+        /* Set the Initialization mode */
+        RTC->INITSTS = (uint32_t)RTC_INITSTS_INITM;
+
+        /* Wait till RTC is in INIT state and if Time out is reached exit */
+        do
+        {
+            initstatus = RTC->INITSTS & RTC_INITSTS_INITF;
+            initcounter++;
+        } while ((initcounter != INITMODE_TIMEOUT) && (initstatus == 0x00));
+
+        if ((RTC->INITSTS & RTC_INITSTS_INITF) != RESET)
+        {
+            status = SUCCESS;
+        }
+        else
+        {
+            status = ERROR;
+        }
     }
     else
     {
-       status = SUCCESS;
+        status = SUCCESS;
     }
+
     return (status);
 }
 
@@ -479,8 +483,7 @@ ErrorStatus RTC_ConfigTime(uint32_t RTC_Format, RTC_TimeType* RTC_TimeStruct)
     {
        if ((RTC->CTRL & RTC_CTRL_HFMT) != (uint32_t)RESET)
        {
-          tmpregister = RTC_Bcd2ToByte(RTC_TimeStruct->Hours);
-          assert_param(IS_RTC_12HOUR(tmpregister));
+          assert_param(IS_RTC_12HOUR(RTC_Bcd2ToByte(RTC_TimeStruct->Hours)));
           assert_param(IS_RTC_H12(RTC_TimeStruct->H12));
        }
        else
@@ -538,7 +541,10 @@ ErrorStatus RTC_ConfigTime(uint32_t RTC_Format, RTC_TimeType* RTC_TimeStruct)
     RTC->WRP = 0xFF;
     /* Waits until the RTC Time and Date registers 
     (RTC_TSH and RTC_DATE) are  synchronized with RTC APB clock. */
-    status=RTC_WaitForSynchro();
+    if(status!=ERROR)
+    {
+        status=RTC_WaitForSynchro();
+    }
     return status;
 }
 
@@ -684,7 +690,10 @@ ErrorStatus RTC_SetDate(uint32_t RTC_Format, RTC_DateType* RTC_DateStruct)
     RTC->WRP = 0xFF;
     /* Waits until the RTC Time and Date registers 
     (RTC_TSH and RTC_DATE) are  synchronized with RTC APB clock. */
-    status=RTC_WaitForSynchro();
+    if(ERROR!=status)
+    {
+       status=RTC_WaitForSynchro();
+    }
     return status;
 }
 

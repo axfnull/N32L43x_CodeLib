@@ -28,7 +28,7 @@
 /**
  * @file main.c
  * @author Nations 
- * @version v1.2.0
+ * @version V1.2.1
  *
  * @copyright Copyright (c) 2022, Nations Technologies Inc. All rights reserved.
  */
@@ -54,6 +54,21 @@ void delay(vu32 nCount)
     }
 }
 
+
+/**
+ * @brief  SRAM2 Reset function.
+ */
+void SRAM2_Reset(void)
+{
+    uint8_t* p_sram2=(uint8_t*)SRAM2_START_ADDR;
+    uint32_t i =0;
+    for(i=0;i<SRAM2_SIZE;i++)
+    {
+        *(p_sram2+i) = 0;
+    }
+}
+
+
 /** @addtogroup PWR_STOP
  * @{
  */
@@ -69,7 +84,8 @@ int main(void)
          To reconfigure the default setting of SystemInit() function, refer to
          system_n32l43x.c file
        */
-        /* Initialize USART,TX: PA9 RX: PA10*/
+    
+    /* Initialize USART,TX: PA9 RX: PA10*/
     log_init(); 
     log_info("\r\n MCU Reset!\r\n");
     /* Enable PWR Clock */
@@ -84,9 +100,13 @@ int main(void)
        /* Insert a long delay */
        delay(600);
        log_info("\r\n MCU Prepare Enter Stop2 Mode Core Stop Run \r\n");
-       /* Request to enter STOP2 mode*/
-       PWR_EnterSTOP2Mode(PWR_STOPENTRY_WFI,PWR_CTRL3_RAM1RET); 
-       SetSysClockToPLL(108000000,SYSCLK_PLLSRC_HSE_PLLDIV2);
+       /* Request to enter STOP2 mode,and config SRAM1 retain*/
+       PWR_EnterSTOP2Mode(PWR_STOPENTRY_WFI,PWR_CTRL3_RAM1RET);
+       /*Reset SRAM2 when wake up from stop2 mode*/
+       SRAM2_Reset();
+       /*multiply System Clock Frequency*/
+       SetSysClockToPLL(SystemCoreClock,SYSCLK_PLLSRC_HSE_PLLDIV2);
+       log_init();
        log_info("\r\n MCU Run In Run Mode Sysclock From PLL(108MHz) \r\n");    
        LEDBlink(LED1_PORT,LED1_PIN);
     }

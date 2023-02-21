@@ -28,7 +28,7 @@
 /**
  * @file glass_lcd.h
  * @author Nations 
- * @version v1.2.0
+ * @version V1.2.1
  *
  * @copyright Copyright (c) 2022, Nations Technologies Inc. All rights reserved.
  */
@@ -48,17 +48,17 @@
   * @{
   */
 
-/** @addtogroup STM32L476G_EVAL
+/** @addtogroup N32L43x_EVAL
   * @{
   */
 
-/** @addtogroup STM32L476G_EVAL_GLASS_LCD
+/** @addtogroup N32L43x_EVAL_GLASS_LCD
   * @{
   */
 
 /* Exported types ------------------------------------------------------------*/
 
-/** @defgroup STM32L476G_EVAL_GLASS_LCD_Exported_Types Exported Types
+/** @defgroup N32L43x_EVAL_GLASS_LCD_Exported_Types Exported Types
   * @{
   */
 /**
@@ -113,7 +113,7 @@ typedef enum
   * @}
   */
 
-/** @defgroup STM32L476G_EVAL_GLASS_LCD_Exported_Constants Exported Constants
+/** @defgroup N32L43x_EVAL_GLASS_LCD_Exported_Constants Exported Constants
   * @{
   */
 #define DOT             0x8000 /* for add decimal point in string */
@@ -125,7 +125,7 @@ typedef enum
 
 /* Exported functions --------------------------------------------------------*/
 
-/** @defgroup STM32L476G_EVAL_GLASS_LCD_Exported_Functions Exported Functions
+/** @defgroup N32L43x_EVAL_GLASS_LCD_Exported_Functions Exported Functions
   * @{
   */
 void BSP_LCD_GLASS_Init(void);
@@ -161,6 +161,6 @@ void BSP_LCD_GLASS_SignalLevelConfig(uint8_t SignalLevel);
 }
 #endif
 
-#endif /* __STM32L476G_EVAL_GLASS_LCD_H */
+#endif /* __N32L43x_EVAL_GLASS_LCD_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+/************************ (C) COPYRIGHT Nations Technologies Inc *****END OF FILE****/

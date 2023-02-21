@@ -28,7 +28,7 @@
 /**
  * @file main.c
  * @author Nations 
- * @version v1.2.0
+ * @version V1.2.1
  *
  * @copyright Copyright (c) 2022, Nations Technologies Inc. All rights reserved.
  */
@@ -77,7 +77,8 @@ int main(void)
       /* Exit LP RUN mode*/
       PWR_ExitLowPowerRunMode();
       /*Switch sysclok from MSI to PLL*/
-      SetSysClockToPLL(108000000,SYSCLK_PLLSRC_HSE_PLLDIV2);
+      SetSysClockToPLL(SystemCoreClock,SYSCLK_PLLSRC_HSE_PLLDIV2);
+      log_init(); 
       log_info("\r\n MCU Run In Run Mode Sysclock From PLL(108MHz)\r\n");
     }
 }

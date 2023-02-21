@@ -28,7 +28,7 @@
 /**
  * @file n32l43x_pwr.c
  * @author Nations
- * @version v1.2.0
+ * @version V1.2.1
  *
  * @copyright Copyright (c) 2022, Nations Technologies Inc. All rights reserved.
  */
@@ -355,24 +355,29 @@ void PWR_EnterLowPowerRunMode(void)
 }
 
 /**
-  * @brief  Exit Low power run mode.    
-  * @param  
-  *     @arg 
-  *     @arg 
+  * @brief  Enters Low power run mode.    
   * @retval None
   */
 void PWR_ExitLowPowerRunMode(void)
 {
     PWR->CTRL1 &= ~PWR_CTRL1_LPREN;
+    _SetLprunSwitch(3);
+    while((PWR->STS2 &PWR_STS2_MRF) != PWR_STS2_MRF);
     while((PWR->STS2 &PWR_STS2_LPRUNF) != PWR_STS2_LPRUNF);
-    /* Configure the Flash read latency to be grater than 2, so LVE/SE timing requirement is guaranteed */
-    FLASH_SetLatency(FLASH_LATENCY_2);  
-    /* clear LVMREQ */  
-    FLASH->AC &= ~FLASH_AC_LVMEN;  
-    /* wait LVE is deasserted by polling the LVMVLD bit */  
-    while((FLASH->AC &FLASH_AC_LVMF) != 0);   
-    /* Configure the latency of Flash read cycle to proper value which depends on the Flash read access time */
-    FLASH_SetLatency(FLASH_LATENCY_0);    
+    FLASH_SetLatency(FLASH_LATENCY_2);    //Configure the Flash read latency to be grater than 2, so LVE/SE timing requirement is guaranteed
+    FLASH->AC &= ~FLASH_AC_LVMEN;                  //clear LVMREQ
+    while((FLASH->AC &FLASH_AC_LVMF) != 0);   //wait LVE is deasserted by polling the LVMVLD bit
+    _SetPvdBorMode(1);
+    _SetBandGapMode(1);
+    _SetLprunSramVoltage(1);
+    FLASH_SetLatency(FLASH_LATENCY_0);    //Configure the latency of Flash read cycle to proper value which depends on the Flash read access time.
+    _SetLprunSwitch(2);
+    while((PWR->STS2 &0X2) != 0)           // wait MF to be 0 first
+    {
+    }
+    while((PWR->STS2 &0X2) != 2)           // wait MF to be 1 then
+    {
+    }
 }
 
 /**
